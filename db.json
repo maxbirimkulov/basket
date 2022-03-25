@@ -2,7 +2,7 @@
   "sneakers": [
     {
       "id": 1,
-      "title": "Мужские Кроссовки Nike Blazer Mid Suede",
+      "title": "Мужские Кроссовки Nike Blazer Mid Suede1",
       "price": 12999,
       "imageUrl": "sneakers/1.jpg"
     },
@@ -14,7 +14,7 @@
     },
     {
       "id": 3,
-      "title": "Мужские Кроссовки Nike Blazer Mid Suede",
+      "title": "Мужские Кроссовки Nike Blazer Mid Suede2",
       "price": 8499,
       "imageUrl": "sneakers/3.jpg"
     },
@@ -44,77 +44,106 @@
     },
     {
       "id": 8,
-      "title": "Кроссовки Orange Boomb Edition",
+      "title": "Кроссовки Orange Boomb Edition1111",
       "price": 7499,
       "imageUrl": "sneakers/8.jpg"
     },
     {
       "id": 9,
-      "title": "Кроссовки Orange Boomb Edition",
+      "title": "Кроссовки Orange Boomb Edition111",
       "price": 7499,
       "imageUrl": "sneakers/9.jpg"
     },
     {
       "id": 10,
-      "title": "Кроссовки Orange Boomb Edition",
+      "title": "Кроссовки Orange Boomb Edition11",
       "price": 7499,
       "imageUrl": "sneakers/10.jpg"
     }
   ],
   "favorites": [
     {
-      "title": "Мужские Кроссовки Nike Blazer Mid Suede",
-      "price": 12999,
-      "imageUrl": "sneakers/1.jpg",
-      "id": 1
-    },
-    {
-      "title": "Мужские Кроссовки Nike Blazer Mid Suede",
-      "price": 8499,
-      "imageUrl": "sneakers/3.jpg",
-      "id": 2
-    },
-    {
+      "id": 6,
       "title": "Кроссовки Black Edition",
       "price": 16999,
-      "imageUrl": "sneakers/6.jpg",
-      "id": 3
+      "imageUrl": "sneakers/6.jpg"
     },
     {
-      "title": "Кроссовки Future Rider",
-      "price": 16999,
-      "imageUrl": "sneakers/5.jpg",
-      "id": 4
-    },
-    {
+      "id": 7,
       "title": "Кроссовки Orange Boomb Edition",
       "price": 7499,
-      "imageUrl": "sneakers/7.jpg",
-      "id": 5
+      "imageUrl": "sneakers/7.jpg"
     },
     {
-      "title": "Мужские Кроссовки Nike Air Max 270",
-      "price": 15600,
-      "imageUrl": "sneakers/2.jpg",
-      "id": 6
-    },
+      "id": 8,
+      "title": "Кроссовки Orange Boomb Edition1111",
+      "price": 7499,
+      "imageUrl": "sneakers/8.jpg"
+    }
+  ],
+  "orders": [
     {
-      "title": "Мужские Кроссовки Nike Blazer Mid Suede",
-      "price": 12999,
-      "imageUrl": "sneakers/1.jpg",
-      "id": 7
-    },
-    {
-      "title": "Мужские Кроссовки Nike Blazer Mid Suede",
-      "price": 8499,
-      "imageUrl": "sneakers/3.jpg",
-      "id": 8
-    },
-    {
-      "title": "Мужские Кроссовки Nike Air Max 270",
-      "price": 15600,
-      "imageUrl": "sneakers/2.jpg",
-      "id": 9
+      "name": "Акдил",
+      "tel": "50262222",
+      "city": "Бишкек",
+      "street": "Ленина",
+      "info": "фвфывфывфы",
+      "pay": "Optima bank",
+      "money": "100000",
+      "order": [
+        {
+          "id": 2,
+          "title": "Мужские Кроссовки Nike Air Max 270",
+          "price": 15600,
+          "imageUrl": "sneakers/2.jpg"
+        },
+        {
+          "id": 3,
+          "title": "Мужские Кроссовки Nike Blazer Mid Suede2",
+          "price": 8499,
+          "imageUrl": "sneakers/3.jpg"
+        },
+        {
+          "id": 4,
+          "title": "Кроссовки Puma X Aka Boku Future Rider",
+          "price": 8999,
+          "imageUrl": "sneakers/4.jpg"
+        },
+        {
+          "id": 7,
+          "title": "Кроссовки Orange Boomb Edition",
+          "price": 7499,
+          "imageUrl": "sneakers/7.jpg"
+        },
+        {
+          "id": 8,
+          "title": "Кроссовки Orange Boomb Edition1111",
+          "price": 7499,
+          "imageUrl": "sneakers/8.jpg"
+        },
+        {
+          "id": 6,
+          "title": "Кроссовки Black Edition",
+          "price": 16999,
+          "imageUrl": "sneakers/6.jpg"
+        },
+        {
+          "id": 1,
+          "title": "Мужские Кроссовки Nike Blazer Mid Suede1",
+          "price": 12999,
+          "imageUrl": "sneakers/1.jpg"
+        },
+        {
+          "id": 5,
+          "title": "Кроссовки Future Rider",
+          "price": 16999,
+          "imageUrl": "sneakers/5.jpg"
+        }
+      ],
+      "price": 95093,
+      "nds": 4755,
+      "change": null,
+      "id": 1
     }
   ]
 }

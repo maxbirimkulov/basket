@@ -8,6 +8,7 @@ export const Context = (props) => {
     const [shoes, setShoes] = useState([]);
     const [cart, setCart] = useState([]);
     const [favorites, setFavorites] = useState([]);
+    const [orders, setOrders] = useState([]);
 
     const getAllShoes = () => {
         axios('http://localhost:8080/sneakers')
@@ -15,16 +16,33 @@ export const Context = (props) => {
             .catch((err)  => console.log('Произошла ошибка') )
     };
 
-    const getFavorites = (id) => {
-        let res = shoes.filter(el => el.id === id);
-        let title = res[0].title,
-            price = res[0].price,
-            imageUrl = res[0].imageUrl;
-        axios.post('http://localhost:8080/favorites', {
-            title,
-            price,
-            imageUrl
-        })
+    const getAllFavorites = () => {
+        axios.get('http://localhost:8080/favorites')
+            .then(({data}) => setFavorites(data))
+            .catch((err) => console.log('Error'))
+    };
+
+
+
+    const postFavorites = (item) => {
+        axios.post('http://localhost:8080/favorites', {...item})
+            .then(() => getAllFavorites())
+    };
+
+    const getAllOrders = () => {
+        axios.get('http://localhost:8080/orders')
+            .then(({data}) => setOrders(data))
+            .catch((err) => console.log('Error'))
+    };
+
+    const postOrders = (item) => {
+        axios.post('http://localhost:8080/orders', {...item})
+            .then(() => getAllOrders())
+    };
+
+    const deleteFavorites = (id) => {
+      axios.delete(`http://localhost:8080/favorites/${id}`)
+          .then(() => getAllFavorites())
     };
 
     const addShoesInCart = (id) => {
@@ -48,10 +66,15 @@ export const Context = (props) => {
        setCart,
        addShoesInCart,
        deleteShoesInCart,
-       getFavorites,
+       getAllFavorites,
+       postFavorites,
        favorites,
-       setFavorites
-
+       setFavorites,
+       deleteFavorites,
+       getAllOrders,
+       postOrders,
+       orders,
+       setOrders
    };
 
     return <CustomContext.Provider value={value}>

@@ -1,20 +1,15 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {CustomContext} from "../../context";
-import axios from "axios";
 import styles from "../Favourites/favourites.module.css";
-import {BsHeart} from "react-icons/bs";
+import {BsHeartFill} from "react-icons/bs";
 import {Link} from 'react-router-dom'
 import {AiOutlineArrowLeft} from 'react-icons/ai'
 
 const Favourites = () => {
 
-    const {favorites, setFavorites, cart, deleteShoesInCart, addShoesInCart, getFavorites} = useContext(CustomContext);
+    const {favorites, cart, deleteShoesInCart, addShoesInCart, deleteFavorites} = useContext(CustomContext);
 
-    useEffect(() => {
-       axios.get('http://localhost:8080/favorites')
-           .then(({data}) => setFavorites(data))
-           .catch((err) => console.log('Error'))
-    }, []);
+
 
     return (
         <section>
@@ -30,7 +25,7 @@ const Favourites = () => {
                 favorites.map(item => (
 
                             <div className={styles.card} key={item.id}>
-                                <button className={styles.cardLike} type='button' onClick={() => getFavorites(item.id)}><BsHeart/></button>
+                                <button className={styles.cardLike} type='button' style={{background: '#FEF0F0', color: '#FF8585', border: 'none'}} onClick={() => deleteFavorites(item.id)}><BsHeartFill/></button>
                                 <img className={styles.cardImg}  src={item.imageUrl} alt={item.title}/>
                                 <h3 className={styles.cardTitle}>{item.title}</h3>
                                 <div className={styles.cardFooter}>
@@ -41,7 +36,7 @@ const Favourites = () => {
 
                                     {
                                         cart.filter((el) => el.id === item.id ).length
-                                            ?  <button type='button' style={{background: 'linear-gradient(180deg, #89F09C 0%, #3CC755 100%)', color: 'white'}} className={styles.cardBtn} onClick={() => deleteShoesInCart(item.id)}>✔</button>
+                                            ?  <button type='button' style={{background: 'linear-gradient(180deg, #89F09C 0%, #3CC755 100%)', color: 'white', border: 'none'}} className={styles.cardBtn} onClick={() => deleteShoesInCart(item.id)}>✔</button>
                                             :  <button type='button' className={styles.cardBtn} onClick={() => addShoesInCart(item.id)}>+</button>
                                     }
                                 </div>

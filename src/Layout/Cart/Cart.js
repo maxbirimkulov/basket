@@ -1,11 +1,14 @@
 import React,{useContext} from 'react';
 import {CustomContext} from "../../context";
 import styles from './cart.module.css'
-import Sneakers from '../../assets/sneaker.png'
+import {useNavigate} from 'react-router-dom'
 
 const Cart = ({isCart, setIsCart}) => {
 
     const {cart, deleteShoesInCart} = useContext(CustomContext);
+
+
+    const navigate = useNavigate();
 
     const closeCart = (e) => {
         if (e.target.className === styles.overlay){
@@ -47,7 +50,11 @@ const Cart = ({isCart, setIsCart}) => {
                             <div className={styles.cartFooterLine}/>
                             <p className={styles.itemPrice}>{Math.ceil(cart.reduce((acc, rec) => acc + rec.price , 0) / 100 * 5)} руб. </p>
                         </div>
-                        <button type='button' className={styles.cartFooterBtn}>Оформить заказ</button>
+                        <button type='button' className={styles.cartFooterBtn} onClick={() => {
+                            setIsCart(false);
+                            navigate('/order')
+                        }}>Оформить заказ</button>
+
                     </div>
             </div>
         </div>

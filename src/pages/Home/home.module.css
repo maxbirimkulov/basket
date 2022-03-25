@@ -36,7 +36,8 @@
     width: 32px;
     height: 32px;
     background: #FFFFFF;
-    border: 1px solid #F8F8F8;
+    border: 1px solid #8BB43C;
+    color: #8BB43C;
     box-sizing: border-box;
     border-radius: 7px;
     cursor: pointer;
@@ -73,9 +74,9 @@
 }
 .cardBtn{
     background: #FFFFFF;
-    border: 1px solid #F2F2F2;
+    border: 1px solid #8BB43C;
     border-radius: 8px;
-    color:#D3D3D3;
+    color: #8BB43C;
     width: 32px;
     height: 32px;
     cursor: pointer;

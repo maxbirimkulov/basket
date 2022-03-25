@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React, {useContext} from 'react';
 import {CustomContext} from "../../context";
 import styles from './Header.module.css'
 import {MdOutlineLocalGroceryStore} from 'react-icons/md'
@@ -8,7 +8,7 @@ import logo from '../../assets/image 4.png'
 import {Link} from 'react-router-dom'
 
 const Header = ({isCart, setIsCart}) => {
-const {cart} = useContext(CustomContext);
+    const {cart, favorites} = useContext(CustomContext);
     const {header, headerNav, headerLeft, headerRight, headerLeftInfo, headerLeftSubtitle, headerRightPrice, list, item} = styles;
     return (
         <header className={header}>
@@ -29,11 +29,12 @@ const {cart} = useContext(CustomContext);
                                 <span style={{cursor: 'pointer'}} onClick={() => setIsCart(true)}>
                                     <MdOutlineLocalGroceryStore/>
                                 </span>
-                                <p className={headerRightPrice}>{cart.reduce((acc,rec) => acc + rec.price , 0)} руб.</p>
+                                <p className={headerRightPrice}>{cart.reduce((acc, rec) => acc + rec.price, 0)} руб.</p>
                             </li>
                             <li className={item}>
                                 <Link style={{color: '#9B9B9B'}} to='/favourites'>
                                     <AiOutlineHeart/>
+                                    <sup style={{fontSize: '12px'}}>{favorites.length < 9 ? '9+' : favorites.length ? favorites.length : ''}</sup>
                                 </Link>
                             </li>
                             <li className={item}>

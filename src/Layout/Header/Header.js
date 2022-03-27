@@ -34,7 +34,7 @@ const Header = ({isCart, setIsCart}) => {
                             <li className={item}>
                                 <Link style={{color: '#9B9B9B'}} to='/favourites'>
                                     <AiOutlineHeart/>
-                                    <sup style={{fontSize: '12px'}}>{favorites.length < 9 ? '9+' : favorites.length ? favorites.length : ''}</sup>
+                                    <sup style={{fontSize: '12px'}}>{favorites.length > 9 ? '9+' : favorites.length ? favorites.length : ''}</sup>
                                 </Link>
                             </li>
                             <li className={item}>

@@ -1,70 +1,112 @@
 import React, {useContext} from 'react';
 import styles from './order.module.css'
 import {CustomContext} from "../../context";
-import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom';
+import {useForm} from 'react-hook-form'
 
 const Order = () => {
 
     const {cart, deleteShoesInCart, postOrders, setCart} = useContext(CustomContext);
 
+    const {
+        register,
+        formState : {
+            errors
+        },
+        handleSubmit,
+        reset
+    } = useForm({
+        mode: "onBlur"
+    });
+
     const navigate = useNavigate();
 
-    const createOrder = (e) => {
-        e.preventDefault();
+    const createOrder = (data) => {
+        const toDate = (date) => {
+            return new Intl.DateTimeFormat('ru-Ru', {
+                day:'2-digit',
+                month:'2-digit',
+                year:'numeric'
+            }).format(new Date(date))
+        };
         postOrders({
-            name: e.target[0].value,
-            tel: e.target[1].value,
-            city: e.target[2].value,
-            street: e.target[3].value,
-            info: e.target[4].value ? e.target[4].value : 'no info',
-            pay: e.target[5].value,
-            money: e.target[6].value,
+            ...data,
+            info: data.info ? data.info : 'no info',
             order: cart,
             price: cart.reduce((acc, rec) => acc + rec.price , 0),
             nds: Math.ceil(cart.reduce((acc, rec) => acc + rec.price , 0) / 100 * 5),
-            change: e.target[5].value - cart.reduce((acc, rec) => acc + rec.price , 0),
+            change: data.money - cart.reduce((acc, rec) => acc + rec.price , 0),
+            date: toDate(new Date())
         });
-        e.target[0].value = '';
-        e.target[1].value = '';
-        e.target[2].value = '';
-        e.target[3].value = '';
-        e.target[4].value = '';
-        e.target[5].value = '';
-        e.target[6].value = '';
-
         setCart([]);
         navigate('/buy')
+        reset()
     };
 
     return (
         <section>
             <h2 className={styles.title}>Заказ</h2>
-
             <div className={styles.row}>
-                <form  className={styles.form} onSubmit={createOrder}>
+                <form  className={styles.form} onSubmit={handleSubmit(createOrder)}>
                     <div className={styles.formItem}>
                         <label className={styles.formLabel} htmlFor="name">Имя *</label>
-                        <input required className={styles.formInput} type="text" name='name'/>
+                        <input {...register('name', {
+                            required : 'Это поле обязательно для заполнения',
+                            minLength: {
+                                value: 2,
+                                message: 'Минимум 2 символа'
+                            }
+                        })} className={styles.formInput} type="text" />
                     </div>
+                    <span className={styles.error}>
+                         {errors?.name && errors?.name?.message }
+                    </span>
                     <div className={styles.formItem}>
                         <label className={styles.formLabel} htmlFor="tel">Телефон *</label>
-                        <input required className={styles.formInput} type="tel" name='tel'/>
+                        <input {...register('tel', {
+                            required: "Поле обязательно к заполнению",
+                            pattern: {
+                                value: '/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/',
+                                message: "Invalid phone no",
+                            }
+                        })}  className={styles.formInput} type="tel" />
                     </div>
+                    <span className={styles.error}>
+                         {errors?.tel && errors?.tel?.message }
+                    </span>
                     <div className={styles.formItem}>
                         <label className={styles.formLabel} htmlFor="city">Город *</label>
-                        <input required className={styles.formInput} type="text" name='city'/>
+                        <input {...register('city', {
+                            required : 'Это поле обязательно для заполнения',
+                            minLength: {
+                                value: 2,
+                                message: 'Минимум 2 символа'
+                            }
+                        })} className={styles.formInput} type="text" />
                     </div>
+                    <span className={styles.error}>
+                         {errors?.city && errors?.city?.message }
+                    </span>
                     <div className={styles.formItem}>
                         <label className={styles.formLabel} htmlFor="street">Улица *</label>
-                        <input required className={styles.formInput} type="text" name='street'/>
+                        <input {...register('street', {
+                            required : 'Это поле обязательно для заполнения',
+                            minLength: {
+                                value: 2,
+                                message: 'Минимум 2 символа'
+                            }
+                        })} className={styles.formInput} type="text" />
                     </div>
+                    <span className={styles.error}>
+                         {errors?.street && errors?.street?.message }
+                    </span>
                     <div className={styles.formItem}>
                         <label className={styles.formLabel} htmlFor="info">Дополнительная информация *</label>
-                        <textarea className={styles.formTextArea} name='info'/>
+                        <textarea {...register('info')} className={styles.formTextArea} />
                     </div>
                     <div className={styles.formItem}>
                         <label className={styles.formLabel} htmlFor="pay">Способ оплаты *</label>
-                        <select required name="pay" id="" className={styles.formSelect}>
+                        <select {...register('pay')} className={styles.formSelect}>
                             <option value="Наличными">Наличными</option>
                             <option value="Demir bank">Demir bank</option>
                             <option value="Optima bank">Optima bank</option>
@@ -72,16 +114,29 @@ const Order = () => {
                     </div>
                     <div className={styles.formItem}>
                         <label className={styles.formLabel} htmlFor="money">Вносимая сумма *</label>
-                        <input min={cart.reduce((acc, rec) => acc + rec.price , 0)} required className={styles.formInput} type="number" name='money'/>
+                        <input {...register('money', {
+                            required : 'Это поле обязательно для заполнения',
+                            min : {
+                                value: cart.reduce((acc, rec) => acc + rec.price , 0),
+                                message: `Ваша сумма не должна быть меньше ${cart.reduce((acc, rec) => acc + rec.price , 0)} `
+                            }
+                        })}  className={styles.formInput} type="number" />
                     </div>
+                    <span className={styles.error}>
+                         {errors?.money && errors?.money?.message }
+                    </span>
                     <div className={styles.formItem}>
-                        <label className={styles.formLabel} htmlFor="money">Условия *</label>
+                        <label className={styles.formLabel} htmlFor="checkbox">Условия *</label>
                         <div className={styles.checkboxBlock}>
-                            <input required className={styles.checkbox} type="checkbox" name='money'/>
+                            <input {...register('checkbox', {
+                                required : 'Это поле обязательно для заполнения'
+                            })}  className={styles.checkbox} type="checkbox" />
                             <span className={styles.checkboxText}>С условиями доставки согласен *</span>
                         </div>
-
                     </div>
+                    <span className={styles.error}>
+                         {errors?.checkbox && errors?.checkbox?.message }
+                    </span>
 
                     <button type='submit' className={styles.formBtn}>Заказать</button>
                 </form>

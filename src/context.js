@@ -10,6 +10,7 @@ export const Context = (props) => {
     const [favorites, setFavorites] = useState([]);
     const [orders, setOrders] = useState([]);
 
+
     const getAllShoes = () => {
         axios('http://localhost:8080/sneakers')
             .then(({data}) => setShoes(data))
@@ -39,6 +40,8 @@ export const Context = (props) => {
         axios.post('http://localhost:8080/orders', {...item})
             .then(() => getAllOrders())
     };
+
+
 
     const deleteFavorites = (id) => {
       axios.delete(`http://localhost:8080/favorites/${id}`)

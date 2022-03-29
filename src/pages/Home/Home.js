@@ -1,21 +1,36 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import {CustomContext} from "../../context";
 import Slider from "./Slider/Slider";
 import styles from './home.module.css'
 import {BsHeart, BsHeartFill} from 'react-icons/bs'
+import {LazyLoadImage} from "react-lazy-load-image-component";
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 
 const Home = () => {
 
     const {getAllShoes, shoes, addShoesInCart, cart,deleteShoesInCart,  postFavorites, favorites, deleteFavorites} = useContext(CustomContext);
 
+    const [search, setSearch] = useState('')
+
     useEffect(() => {
+        if (search !== '') {
+            getAllShoes(search)
+        } else {
             getAllShoes()
-    },[]);
+        }
+    },[search]);
 
     return (
         <section>
             <Slider/>
-            <h2 className={styles.title}>Все кроссовки</h2>
+            <div className={styles.action}>
+                <h2 className={styles.title}>Все кроссовки</h2>
+                <input onChange={(e) => setSearch(e.target.value)} type="search" className={styles.search} placeholder='Поиск...'/>
+            </div>
+
+
+
 
             <div className={styles.row}>
                 {shoes.map((item) => (
@@ -26,8 +41,7 @@ const Home = () => {
                                 : <button className={styles.cardLike} type='button' onClick={() => postFavorites(item)}><BsHeart/></button>
                         }
 
-
-                        <img className={styles.cardImg}  src={item.imageUrl} alt={item.title}/>
+                        <LazyLoadImage effect='blur' className={styles.cardImg} src={item.imageUrl} alt={item.title}/>
                         <h3 className={styles.cardTitle}>{item.title}</h3>
                         <div className={styles.cardFooter}>
                             <div className={styles.cardPrice}>

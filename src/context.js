@@ -11,8 +11,8 @@ export const Context = (props) => {
     const [orders, setOrders] = useState([]);
 
 
-    const getAllShoes = () => {
-        axios('http://localhost:8080/sneakers')
+    const getAllShoes = (title = '') => {
+        axios(`http://localhost:8080/sneakers?title_like=${title}`)
             .then(({data}) => setShoes(data))
             .catch((err)  => console.log('Произошла ошибка') )
     };

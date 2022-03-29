@@ -3,7 +3,7 @@ import {CustomContext} from "../../context";
 import styles from './Header.module.css'
 import {MdOutlineLocalGroceryStore} from 'react-icons/md'
 import {AiOutlineHeart} from 'react-icons/ai'
-import {BiUserCircle} from 'react-icons/bi'
+import {AiOutlineShopping} from 'react-icons/ai'
 import logo from '../../assets/image 4.png'
 import {Link} from 'react-router-dom'
 
@@ -39,7 +39,7 @@ const Header = ({isCart, setIsCart}) => {
                             </li>
                             <li className={item}>
                                 <Link style={{color: '#9B9B9B'}} to='/buy'>
-                                    <BiUserCircle/>
+                                    <AiOutlineShopping/>
                                 </Link>
 
                             </li>
